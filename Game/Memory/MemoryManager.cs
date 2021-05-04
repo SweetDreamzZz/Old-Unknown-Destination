@@ -14,6 +14,14 @@ namespace softnaosu.Game.Memory
             [Out] byte[] lpBuffer,
             uint dwSize,
             out IntPtr lpNumberOfBytesRead);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool WriteProcessMemory(IntPtr hProcess,
+            IntPtr lpBaseAddress,
+            byte[] lpBuffer,
+            uint nSize,
+            out IntPtr lpNumberOfBytesRead);
         
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern uint VirtualQueryEx(IntPtr hProcess,
@@ -23,8 +31,6 @@ namespace softnaosu.Game.Memory
         
         public Process Process;
 
-        public MemoryManager(Process process) => Process = process; 
-        
         public void FindAddressBySignaturePattern(string pattern, out IntPtr address)
         {
             var signatureBytes = convertSignaturePatternToBytes(pattern);
@@ -45,12 +51,15 @@ namespace softnaosu.Game.Memory
             address = IntPtr.Zero;
         }
 
-        public byte[] ReadMemory(IntPtr address, uint dwSize)
+        public byte[] ReadMemory(IntPtr address, uint size)
         {
-            var buffer = new byte[dwSize];
-            ReadProcessMemory(Process.Handle, address, buffer, dwSize, out var bytes);
+            var buffer = new byte[size];
+            ReadProcessMemory(Process.Handle, address, buffer, size, out var bytes);
             return buffer;
         }
+
+        public void WriteMemory(IntPtr address, byte[] buffer, uint size)
+            => WriteProcessMemory(Process.Handle, address, buffer, size, out var bytes);
 
         private List<MemoryRegion> EnumerateMemoryRegions()
         {
