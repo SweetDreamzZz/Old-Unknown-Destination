@@ -1,4 +1,6 @@
-﻿using softnaosu.Config;
+﻿using System.Diagnostics;
+using softnaosu.Config;
+using softnaosu.Game.Memory;
 
 namespace softnaosu
 {
@@ -8,7 +10,7 @@ namespace softnaosu
         {
             Global.Config = ConfigManager.Read();
             
-            // TODO: ЧТО-НИБУДЬ УЖЕ СДЕЛАТЬ, ЧТОБЫ ОНО РАБОТАЛО АААААААААААААААААААААААААААААААААААААААААААААААААААААААА
+            // TODO: Rewrite Memory classes
         }
     }
 }
