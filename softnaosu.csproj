@@ -48,6 +48,9 @@
     <ItemGroup>
         <Compile Include="Game\Config\ConfigManager.cs" />
         <Compile Include="Game\Config\ConfigScheme.cs" />
+        <Compile Include="Game\Enums\Protect.cs" />
+        <Compile Include="Game\Enums\State.cs" />
+        <Compile Include="Game\Enums\Type.cs" />
         <Compile Include="Game\Global.cs" />
         <Compile Include="Game\Memory\Memory.cs" />
         <Compile Include="Game\Memory\MemoryManager.cs" />
@@ -56,6 +59,7 @@
         <Compile Include="Game\Program.cs" />
         <Compile Include="Game\Structures\Beatmap.cs" />
         <Compile Include="Game\Structures\Structure.cs" />
+        <Compile Include="Game\Utils\Extensions.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>

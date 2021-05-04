@@ -1,7 +1,7 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace softnaosu.Config
+namespace softnaosu.Game.Config
 {
     public class ConfigManager
     {

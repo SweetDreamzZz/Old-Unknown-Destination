@@ -1,8 +1,7 @@
 using System.Diagnostics;
-using softnaosu.Config;
-using softnaosu.Game.Memory;
+using softnaosu.Game.Config;
 
-namespace softnaosu
+namespace softnaosu.Game
 {
     public static class Global
     {

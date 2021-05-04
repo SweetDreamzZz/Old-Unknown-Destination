@@ -1,11 +1,11 @@
 using System;
 using softnaosu.Game.Memory;
 
-namespace softnaosu.Structures
+namespace softnaosu.Game.Structures
 {
     public class Structure
     {
-        protected IntPtr BaseAddress { get; }
+        protected readonly IntPtr BaseAddress;
 
         protected Structure(IntPtr baseAddress) => BaseAddress = baseAddress;
 

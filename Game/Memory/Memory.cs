@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using softnaosu.Game.Enums;
+using softnaosu.Game.Utils;
 
 namespace softnaosu.Game.Memory
 {
@@ -19,14 +21,14 @@ namespace softnaosu.Game.Memory
 
             foreach (var region in memoryRegions)
             {
-                if ((int)Global.Process.MainModule.BaseAddress > (int)region.BaseAddress)
+                if (Extensions.BiggerThan(Global.Process?.MainModule?.BaseAddress ?? IntPtr.Zero, region.BaseAddress))
                     continue;
 
                 var regionBytes = MemoryManager.Read(region.BaseAddress, (uint)region.RegionSize);
-                if (compareBytes(signatureBytes, regionBytes) is var offset && offset != IntPtr.Zero)
-                {
-                    address = (IntPtr)((int)region.BaseAddress + (int)offset);
-                }
+                var offset = compareBytes(signatureBytes, regionBytes);
+
+                if (offset != IntPtr.Zero) 
+                    address = Extensions.Add(region.BaseAddress, offset);
             }
             
             address = IntPtr.Zero;
@@ -46,8 +48,8 @@ namespace softnaosu.Game.Memory
                 {
                     memoryRegions.Add(new MemoryRegion(mbi));
                 }
-                
-                currentAddress = (IntPtr)(mbi.BaseAddress.ToInt32() + mbi.RegionSize.ToInt32());
+
+                currentAddress = Extensions.Add(mbi.BaseAddress, mbi.RegionSize);
             }
 
             return memoryRegions;

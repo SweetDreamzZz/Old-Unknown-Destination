@@ -32,7 +32,9 @@ namespace softnaosu.Game.Memory
 
         public static int ReadInt32(IntPtr address) => BitConverter.ToInt32(Read(address, sizeof(int)), 0);
 
-        public static float ReadFloat(IntPtr address) => BitConverter.ToSingle(Read(address, sizeof(float)), 0);
+        public static float ReadSingle(IntPtr address) => BitConverter.ToSingle(Read(address, sizeof(float)), 0);
+
+        public static double ReadDouble(IntPtr address) => BitConverter.ToDouble(Read(address, sizeof(double)), 0);
 
         public static bool ReadBool(IntPtr address) => BitConverter.ToBoolean(Read(address, sizeof(bool)), 0);
         

@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace softnaosu.Config
+namespace softnaosu.Game.Config
 {
     public class ConfigScheme
     {
