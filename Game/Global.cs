@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using softnaosu.Config;
 using softnaosu.Game.Memory;
 
@@ -7,6 +8,6 @@ namespace softnaosu
     {
         public static ConfigScheme Config;
 
-        public static MemoryManager Memory;
+        public static Process Process;
     }
 }

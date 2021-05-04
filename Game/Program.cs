@@ -9,8 +9,6 @@ namespace softnaosu
         public static void Main(string[] args)
         {
             Global.Config = ConfigManager.Read();
-            
-            // TODO: Rewrite Memory classes
         }
     }
 }
