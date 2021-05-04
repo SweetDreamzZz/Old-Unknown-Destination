@@ -1,6 +1,5 @@
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace softnaosu.Config
 {

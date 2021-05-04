@@ -52,6 +52,7 @@
         <Compile Include="Game\Memory\Memory.cs" />
         <Compile Include="Game\Memory\MemoryManager.cs" />
         <Compile Include="Game\Memory\MemoryRegion.cs" />
+        <Compile Include="Game\Memory\OffsetAttribute.cs" />
         <Compile Include="Game\Program.cs" />
         <Compile Include="Game\Structures\Beatmap.cs" />
         <Compile Include="Game\Structures\Structure.cs" />

@@ -1,10 +1,14 @@
 using System;
+using softnaosu.Game.Memory;
 
 namespace softnaosu.Structures
 {
     public class Beatmap : Structure
     {
+        [Offset(0x28)]
         public string Title;
+        
+        [Offset(0x24)]
         public string TitleUnicode;
         public string Artist;
         public string ArtistUnicode;
@@ -20,7 +24,7 @@ namespace softnaosu.Structures
 
         public Beatmap(IntPtr address) : base(address)
         {
-            var pointer = GetPointer();
+            //var pointer = GetPointer();
             
             
         }
