@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace softnaosu.Game.Memory
 {
@@ -6,15 +7,7 @@ namespace softnaosu.Game.Memory
     public class OffsetAttribute : Attribute
     {
         public readonly IntPtr Offset;
-        
-        public OffsetAttribute(IntPtr offset)
-        {
-            Offset = offset;
-        }
 
-        public OffsetAttribute(int offset)
-        {
-            Offset = (IntPtr) offset;
-        }
+        public OffsetAttribute(int offset) => Offset = (IntPtr) offset;
     }
 }

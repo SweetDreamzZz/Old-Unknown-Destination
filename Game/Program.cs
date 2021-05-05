@@ -1,4 +1,5 @@
-﻿using softnaosu.Game.Config;
+﻿using System.Diagnostics;
+using softnaosu.Game.Config;
 
 namespace softnaosu.Game
 {
@@ -7,8 +8,7 @@ namespace softnaosu.Game
         public static void Main(string[] args)
         {
             Global.Config = ConfigManager.Read();
-            
-            
+            Global.Process = Process.GetProcessesByName(Global.Config.ProcessName)[0];
         }
     }
 }
