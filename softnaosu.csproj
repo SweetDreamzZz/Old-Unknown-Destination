@@ -54,11 +54,12 @@
         <Compile Include="Game\Global.cs" />
         <Compile Include="Game\Memory\MemoryManager.cs" />
         <Compile Include="Game\Memory\MemoryRegion.cs" />
-        <Compile Include="Game\Memory\OffsetAttribute.cs" />
         <Compile Include="Game\Memory\Signatures\Signature.cs" />
         <Compile Include="Game\Memory\Signatures\SignatureBase.cs" />
         <Compile Include="Game\Program.cs" />
-        <Compile Include="Game\Structures\Beatmap.cs" />
+        <Compile Include="Game\Structures\Beatmap\Beatmap.cs" />
+        <Compile Include="Game\Structures\Beatmap\Sections\BeatmapDifficultySection.cs" />
+        <Compile Include="Game\Structures\Beatmap\Sections\BeatmapMetadataSection.cs" />
         <Compile Include="Game\Utils\Extensions.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
