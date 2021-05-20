@@ -2,6 +2,7 @@ bin/
 obj/
 /packages/
 riderModule.iml
-/_ReSharper.Caches/
-.idea/
+/_ReSharper.Caches
+config.json
+.idea
 /packages
