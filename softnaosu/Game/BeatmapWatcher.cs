@@ -12,7 +12,7 @@ namespace softnaosu.Game
 
             while (true)
             {
-                var bm = BeatmapStructure.Current;
+                var bm = BeatmapStructure.CurrentNew();
                 
                 if (bm.BaseAddress != (beatmap?.BaseAddress ?? IntPtr.Zero))
                 {

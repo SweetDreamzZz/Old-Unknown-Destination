@@ -1,4 +1,5 @@
 using System.Text;
+using softnaosu.Memory.Serialization;
 using softnaosu.Memory.Signatures;
 using softnaosu.Memory.Structures.Beatmap.Sections;
 using softnaosu.Utils;
@@ -11,6 +12,26 @@ namespace softnaosu.Memory.Structures.Beatmap
         public BeatmapStructureDifficultySection DifficultySection;
 
         public BeatmapStructureMetadataSection MetadataSection;
+
+        public static BeatmapStructure CurrentNew()
+        {
+            var baseAddress = ReadStruct(BeatmapSignature.PointerAddress);
+            
+            var bmapDif = new BeatmapStructureDifficultySection();
+            using (var reader = SerializationReader.FromMemoryRegion(baseAddress, bmapDif))
+                bmapDif.ReadFromStream(reader);
+            
+            var bmapMeta = new BeatmapStructureMetadataSection();
+            using (var reader = SerializationReader.FromMemoryRegion(baseAddress, bmapMeta))
+                bmapMeta.ReadFromStream(reader);
+
+            return new BeatmapStructure
+            {
+                DifficultySection = bmapDif,
+                MetadataSection = bmapMeta,
+                BaseAddress = baseAddress
+            };
+        }
 
         public static BeatmapStructure Current
         {

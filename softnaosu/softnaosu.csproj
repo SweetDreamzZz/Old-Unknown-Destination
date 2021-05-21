@@ -55,6 +55,8 @@
         <Compile Include="Game\GameProcess.cs" />
         <Compile Include="Global.cs" />
         <Compile Include="Memory\MemoryManager.cs" />
+        <Compile Include="Memory\Serialization\IMemoryDeserializable.cs" />
+        <Compile Include="Memory\Serialization\SerializationReader.cs" />
         <Compile Include="Memory\Signatures\BeatmapSignature.cs" />
         <Compile Include="Memory\Signatures\SignatureBase.cs" />
         <Compile Include="Memory\Structures\Beatmap\BeatmapStructure.cs" />
