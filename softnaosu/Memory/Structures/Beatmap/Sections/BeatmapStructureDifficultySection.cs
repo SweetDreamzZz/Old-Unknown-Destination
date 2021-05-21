@@ -23,11 +23,10 @@ namespace softnaosu.Memory.Structures.Beatmap.Sections
 
         public void ReadFromStream(SerializationReader reader)
         {
-            reader.ReadDouble(); // skip 8 bytes
+            reader.ReadBytes(8); // skip 8 bytes
             SliderMultiplier = reader.ReadDouble();
             SliderTickRate = reader.ReadDouble();
-            reader.ReadDouble(); // skip 8 bytes
-            reader.ReadInt32(); // skip 4 bytes
+            reader.ReadBytes(12); // skip 12 bytes
             ApproachRate = reader.ReadSingle();
             CircleSize = reader.ReadSingle();
             HpDrainRate = reader.ReadSingle();
