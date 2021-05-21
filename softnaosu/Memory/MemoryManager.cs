@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using softnaosu.Objects;
@@ -19,21 +20,19 @@ namespace softnaosu.Memory
             IntPtr lpBaseAddress,
             [Out] byte[] lpBuffer,
             int dwSize,
-            out IntPtr lpNumberOfBytesRead); 
+            out IntPtr lpNumberOfBytesRead);
+
+        public static Process Process;
+
+        public static int ReadInt32(IntPtr address) => BitConverter.ToInt32(ReadBytes(address, sizeof(int)), 0);
+
+        public static float ReadSingle(IntPtr address) => BitConverter.ToSingle(ReadBytes(address, sizeof(float)), 0);
+
+        public static double ReadDouble(IntPtr address) => BitConverter.ToDouble(ReadBytes(address, sizeof(double)), 0);
         
-        public readonly IntPtr HandleProcess;
+        public static bool ReadBool(IntPtr address) => BitConverter.ToBoolean(ReadBytes(address, sizeof(bool)), 0);
 
-        public MemoryManager(IntPtr hProcess) => HandleProcess = hProcess;
-
-        public int ReadInt32(IntPtr address) => BitConverter.ToInt32(ReadBytes(address, sizeof(int)), 0);
-
-        public float ReadSingle(IntPtr address) => BitConverter.ToSingle(ReadBytes(address, sizeof(float)), 0);
-
-        public double ReadDouble(IntPtr address) => BitConverter.ToDouble(ReadBytes(address, sizeof(double)), 0);
-        
-        public bool ReadBool(IntPtr address) => BitConverter.ToBoolean(ReadBytes(address, sizeof(bool)), 0);
-
-        public string ReadString(IntPtr address, Encoding encoding = null)
+        public static string ReadString(IntPtr address, Encoding encoding = null)
         {
             encoding = encoding ?? Encoding.UTF8;
 
@@ -43,10 +42,10 @@ namespace softnaosu.Memory
             return encoding.GetString(ReadBytes(pointer + 0x8, length)).Replace("\0", string.Empty);
         }
 
-        public byte[] ReadBytes(IntPtr address, int size)
+        public static byte[] ReadBytes(IntPtr address, int size)
         {
             var buffer = new byte[size];
-            ReadProcessMemory(HandleProcess, address, buffer, size, out var bytes);
+            ReadProcessMemory(Process.Handle, address, buffer, size, out var bytes);
 
             return buffer;
         }

@@ -1,4 +1,5 @@
 ﻿using softnaosu.Config;
+using softnaosu.Game;
 
 namespace softnaosu
 {
@@ -7,6 +8,8 @@ namespace softnaosu
         public static void Main(string[] args)
         {
             Global.Config = new ConfigScheme();
+            
+            var init = GameProcess.Init();
         }
     }
 }

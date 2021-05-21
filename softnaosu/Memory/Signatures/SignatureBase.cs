@@ -1,31 +1,30 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using softnaosu.Enums;
 using softnaosu.Objects;
 using softnaosu.Utils;
 
-namespace softnaosu.Memory
+namespace softnaosu.Memory.Signatures
 {
-    public class GameProcess
+    public class SignatureBase
     {
-        public MemoryManager Memory;
-
-        public GameProcess(Process process) => Memory = new MemoryManager(process.Handle);
-
-        public bool ScanPattern(byte?[] pattern, out IntPtr address)
+        protected static bool ScanSignature(byte?[] pattern, IntPtr offset, out IntPtr pointerAddress)
         {
-            address = IntPtr.Zero;
+            pointerAddress = IntPtr.Zero;
             
-            var regions = EnumerateMemoryRegions();
+            var memoryRegions = EnumerateMemoryRegions();
             
-            foreach (var region in regions)
+            foreach (var memoryRegion in memoryRegions)
             {
-                var bytes = Memory.ReadBytes(region.BaseAddress, (int)region.RegionSize);
-                if (FindPatternOffset(pattern, bytes) is var offset && offset != IntPtr.Zero)
+                if (Extensions.BiggerThanIntPtr(MemoryManager.Process?.MainModule?.BaseAddress ?? IntPtr.Zero, memoryRegion.BaseAddress))
+                    continue;
+                
+                var bytes = MemoryManager.ReadBytes(memoryRegion.BaseAddress, (int)memoryRegion.RegionSize);
+                if (FindSignatureAddressOffset(pattern, bytes) is var signatureAddressOffset  && signatureAddressOffset != IntPtr.Zero)
                 {
-                    address = Extensions.AddIntPtr(region.BaseAddress, offset);
+                    pointerAddress = Extensions.AddIntPtr(offset,
+                        Extensions.AddIntPtr(memoryRegion.BaseAddress, signatureAddressOffset));
 
                     return true;
                 }
@@ -33,14 +32,14 @@ namespace softnaosu.Memory
 
             return false;
         }
-
-        private List<MemoryRegion> EnumerateMemoryRegions()
+        
+        private static List<MemoryRegion> EnumerateMemoryRegions()
         {
             var regions = new List<MemoryRegion>();
             var address = IntPtr.Zero;
 
             // catch every accessible region in game memory
-            while (MemoryManager.VirtualQueryEx(Memory.HandleProcess,
+            while (MemoryManager.VirtualQueryEx(MemoryManager.Process.Handle,
                 address, out var mbi,
                 (uint) Marshal.SizeOf(typeof(MemoryBasicInformation))) != 0)
             {
@@ -52,8 +51,8 @@ namespace softnaosu.Memory
 
             return regions;
         }
-
-        private IntPtr FindPatternOffset(byte?[] pattern, byte[] target)
+        
+        private static IntPtr FindSignatureAddressOffset(byte?[] pattern, byte[] target)
         {
             for (var i = 0; i + pattern.Length < target.Length; i++)
             {

@@ -5,19 +5,19 @@ namespace softnaosu.Objects
 {
     public struct MemoryBasicInformation
     {
-        public readonly IntPtr BaseAddress;
+        public IntPtr BaseAddress;
 
-        public readonly IntPtr AllocationBase;
+        public IntPtr AllocationBase;
 
-        public readonly Protect AllocationProtect;
+        public Protect AllocationProtect;
         
-        public readonly IntPtr RegionSize;
+        public IntPtr RegionSize;
 
-        public readonly State State;
+        public State State;
 
-        public readonly Protect Protect;
+        public Protect Protect;
 
-        public readonly Enums.Type Type;
+        public Enums.Type Type;
     }
     
     public class MemoryRegion
