@@ -22,10 +22,12 @@ namespace softnaosu.Game
             MemoryManager.Process = process;
             
             // then scan all signatures
-            if (BeatmapSignature.Scan())
+            if (BeatmapSignature.Scan() &&
+                PlayerSignature.Scan())
             {
-                // unnecessary thing, just for test :>
-                BeatmapWatcher.Start();
+                // unnecessary stuff, just for test :>
+                // BeatmapWatcher.Start();
+                // PlayerTest.Start();
                 
                 return true;
             }

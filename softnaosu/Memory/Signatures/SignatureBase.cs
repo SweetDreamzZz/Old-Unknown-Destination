@@ -25,7 +25,7 @@ namespace softnaosu.Memory.Signatures
                 {
                     pointerAddress = Extensions.AddIntPtr(offset,
                         Extensions.AddIntPtr(memoryRegion.BaseAddress, signatureAddressOffset));
-
+                    
                     return true;
                 }
             }
