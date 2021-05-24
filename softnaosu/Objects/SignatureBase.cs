@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using softnaosu.Enums;
-using softnaosu.Objects;
+using softnaosu.Memory;
 using softnaosu.Utils;
 
-namespace softnaosu.Memory.Signatures
+namespace softnaosu.Objects
 {
     public class SignatureBase
     {

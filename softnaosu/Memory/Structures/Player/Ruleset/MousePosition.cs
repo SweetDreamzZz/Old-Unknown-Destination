@@ -1,7 +1,8 @@
 using System;
 using System.Numerics;
+using softnaosu.Memory.Serialization;
 
-namespace softnaosu.Memory.Structures.Player
+namespace softnaosu.Memory.Structures.Player.Ruleset
 {
     public static class Resolution
     {
@@ -9,24 +10,20 @@ namespace softnaosu.Memory.Structures.Player
         public static float Height = 720.0f;
     }
     
-    public class MousePosition
+    public class MousePosition : IMemoryDeserializable
     {
-        [Offset(0x80)] public float X;
+        // Offset 0x80
+        public Vector2 Position;
         
-        [Offset(0x84)] public float Y;
-
-        public Vector2 RelativePosition
+        public Vector2 GetRelativePosition()
         {
-            get
-            {
-                if ((X >= 0 && X <= 1280) && (Y >= 0 && Y <= 720))
-                    return new Vector2(X, Y);
+            if ((Position.X >= 0 && Position.X <= 1280) && (Position.Y >= 0 && Position.Y <= 720))
+                return Position;
 
-                FixCoordinate(X, Resolution.Width, out var x);
-                FixCoordinate(Y, Resolution.Height, out var y);
+            FixCoordinate(Position.X, Resolution.Width, out var x);
+            FixCoordinate(Position.Y, Resolution.Height, out var y);
                 
-                return new Vector2(x, y);
-            }
+            return new Vector2(x, y);
         }
 
         private void FixCoordinate(float coordValue, float maxCoord, out float fixedCoord)
@@ -39,6 +36,15 @@ namespace softnaosu.Memory.Structures.Player
             // TODO: Find current resolution 
             if (coordValue > maxCoord)
                 fixedCoord = coordValue - (coordValue - maxCoord);
+        }
+
+        public int MemoryBlockSize { get; set; } = 0x80 + sizeof(float) * 2;
+
+        public void ReadFromStream(SerializationReader reader)
+        {
+            reader.ReadBytes(0x80);
+
+            Position = reader.ReadVector2();
         }
     }
 }

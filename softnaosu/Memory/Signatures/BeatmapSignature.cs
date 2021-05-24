@@ -1,6 +1,5 @@
 using System;
-using softnaosu.Memory.Structures.Beatmap;
-using softnaosu.Utils;
+using softnaosu.Objects;
 
 namespace softnaosu.Memory.Signatures
 {
@@ -11,6 +10,8 @@ namespace softnaosu.Memory.Signatures
         // EB 0C DD 1C 24 83 3D
         private static readonly byte?[] Pattern = { 0xEB, 0x0C, 0xDD, 0x1C, 0x24, 0x83, 0x3D };
 
-        public static bool Scan() => ScanSignature(Pattern, Extensions.GetStructureOffset<BeatmapStructure>(), out PointerAddress);
+        private const int Offset = 0x7;
+
+        public static bool Scan() => ScanSignature(Pattern, (IntPtr)Offset, out PointerAddress);
     }
 }

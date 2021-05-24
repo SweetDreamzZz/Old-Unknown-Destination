@@ -26,8 +26,8 @@ namespace softnaosu.Game
                 PlayerSignature.Scan())
             {
                 // unnecessary stuff, just for test :>
-                // BeatmapWatcher.Start();
-                // PlayerTest.Start();
+                // BeatmapTest.Start();
+                PlayerTest.Start();
                 
                 return true;
             }

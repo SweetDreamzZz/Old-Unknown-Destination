@@ -11,6 +11,7 @@
         <AssemblyName>softnaosu</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,25 +52,31 @@
         <Compile Include="Enums\Protect.cs" />
         <Compile Include="Enums\State.cs" />
         <Compile Include="Enums\Type.cs" />
-        <Compile Include="Game\BeatmapWatcher.cs" />
+        <Compile Include="Game\BeatmapTest.cs" />
         <Compile Include="Game\GameProcess.cs" />
         <Compile Include="Game\PlayerTest.cs" />
         <Compile Include="Global.cs" />
         <Compile Include="Memory\MemoryManager.cs" />
+        <Compile Include="Memory\Serialization\IMemoryDeserializable.cs" />
+        <Compile Include="Memory\Serialization\SerializationReader.cs" />
         <Compile Include="Memory\Signatures\BeatmapSignature.cs" />
         <Compile Include="Memory\Signatures\PlayerSignature.cs" />
-        <Compile Include="Memory\Signatures\SignatureBase.cs" />
-        <Compile Include="Memory\Structures\Beatmap\BeatmapStructure.cs" />
-        <Compile Include="Memory\Structures\Beatmap\Sections\BeatmapStructureDifficultySection.cs" />
-        <Compile Include="Memory\Structures\Beatmap\Sections\BeatmapStructureMetadataSection.cs" />
+        <Compile Include="Memory\Structures\Beatmap\Beatmap.cs" />
+        <Compile Include="Memory\Structures\Beatmap\Sections\BeatmapDifficultySection.cs" />
+        <Compile Include="Memory\Structures\Beatmap\Sections\BeatmapMetadataSection.cs" />
         <Compile Include="Memory\Structures\OffsetAttribute.cs" />
-        <Compile Include="Memory\Structures\Player\HitObjectManager.cs" />
-        <Compile Include="Memory\Structures\Player\PlayerStructure.cs" />
+        <Compile Include="Memory\Structures\Player\HitObjectManager\HitObjectsList.cs" />
+        <Compile Include="Memory\Structures\Player\HitObjectManager\HitObjects.cs" />
+        <Compile Include="Memory\Structures\Player\HitObjectManager\Objects\HitObject.cs" />
+        <Compile Include="Memory\Structures\Player\HitObjectManager\PlayerHitObjectManager.cs" />
+        <Compile Include="Memory\Structures\Player\Player.cs" />
         <Compile Include="Memory\Structures\Player\Ruleset\MousePosition.cs" />
-        <Compile Include="Memory\Structures\Player\Ruleset\Ruleset.cs" />
-        <Compile Include="Memory\Structures\StructureBase.cs" />
+        <Compile Include="Memory\Structures\Player\Ruleset\PlayerRuleset.cs" />
         <Compile Include="Objects\ConfigManager.cs" />
+        <Compile Include="Objects\ListStructure.cs" />
         <Compile Include="Objects\MemoryRegion.cs" />
+        <Compile Include="Objects\SignatureBase.cs" />
+        <Compile Include="Objects\StructureBase.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Utils\Extensions.cs" />

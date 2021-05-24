@@ -6,7 +6,7 @@ using softnaosu.Objects;
 
 namespace softnaosu.Memory
 {
-    public class MemoryManager
+    public static class MemoryManager
     {
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern int VirtualQueryEx(IntPtr hProcess,

@@ -8,8 +8,12 @@ namespace softnaosu
         public static void Main(string[] args)
         {
             Global.Config = new ConfigScheme();
+            GameProcess.Init();
+        }
+
+        public static void Test<T, TR>() where T : new() where TR : class
+        {
             
-            var init = GameProcess.Init();
         }
     }
 }
