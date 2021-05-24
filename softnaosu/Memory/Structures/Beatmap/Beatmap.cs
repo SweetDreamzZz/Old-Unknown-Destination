@@ -7,7 +7,6 @@ using softnaosu.Utils;
 
 namespace softnaosu.Memory.Structures.Beatmap
 {
-    [Offset(0x7)]
     public class Beatmap : StructureBase
     {
         public BeatmapDifficultySection DifficultySection;
